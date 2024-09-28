@@ -1,0 +1,12 @@
+# Ignore .idea folder
+.idea/
+
+# Ignore target directory
+target/
+
+# Ignore help.md file
+help.md
+
+# Ignore Maven wrapper files
+mvnw
+mvnw.cmd

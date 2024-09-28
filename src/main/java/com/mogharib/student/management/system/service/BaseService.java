@@ -1,0 +1,13 @@
+package com.mogharib.student.management.system.service;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+@Component
+public class BaseService {
+    @Qualifier("modelMapper")
+    @Autowired
+    protected ModelMapper modelMapper;
+}
