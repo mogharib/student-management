@@ -10,3 +10,7 @@ help.md
 # Ignore Maven wrapper files
 mvnw
 mvnw.cmd
+
+
+# Ignore Maven wrapper directory
+.mvn/wrapper/
