@@ -3,6 +3,7 @@ package com.mogharib.student.management.system.auth;
 import com.mogharib.student.management.system.entity.Student;
 import com.mogharib.student.management.system.enums.UserRoleEnum;
 import com.mogharib.student.management.system.exception.InvalidCredentialsException;
+import com.mogharib.student.management.system.exception.PasswordMismatchException;
 import com.mogharib.student.management.system.security.JwtTokenUtil;
 import com.mogharib.student.management.system.service.StudentService;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,11 @@ public class AuthService {
         student.setFirstName(request.getFirstName());
         student.setLastName(request.getLastName());
         student.setEmail(request.getEmail());
+
+        // validate password
+        validatePassword(request);
+
+        // encode password
         student.setPassword(passwordEncoder.encode(request.getPassword()));
         student.setAge(request.getAge());
         student.setAddress(request.getAddress());
@@ -38,5 +44,11 @@ public class AuthService {
         String token = jwtUtil.generateToken(student.getEmail());
         String refreshToken = jwtUtil.generateRefreshToken(student.getEmail());
         return new AuthResponse(token, refreshToken);
+    }
+
+    private void validatePassword(RegisterRequest request) {
+        if (!request.getPassword().equals(request.getConfirmPassword())) {
+            throw new PasswordMismatchException("Passwords do not match");
+        }
     }
 }
