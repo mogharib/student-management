@@ -54,6 +54,25 @@ public class AdminController {
                 .body(courseDto);
     }
 
+    @Operation(
+            summary = "Create new ADMIN USER",
+            description = "REST API to create new Admin User"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "201",
+                    description = "HTTP Status CREATED"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    }
+    )
+
     @PostMapping("/create-admin-user")
     public ResponseEntity<RegisterRequest> create(@Valid @RequestBody RegisterRequest request) {
         adminService.createAdminUser(request);
